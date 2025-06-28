@@ -1,6 +1,7 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import FormRegister from '../FormRegister';
+import { Outlet } from 'react-router-dom';
 
 const Register = () => {
   return (
@@ -12,6 +13,9 @@ const Register = () => {
         <Col className="p-2 mt-2">
           <FormRegister />
         </Col>
+      </Row>
+      <Row>
+        <Outlet />
       </Row>
     </Container>
   );
