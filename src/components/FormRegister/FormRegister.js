@@ -128,7 +128,10 @@ function FormRegister() {
 
         <Form.Group as={Col} controlId="formGridZip">
           <Form.Label>Zip</Form.Label>
-          <Form.Control name="zip" />
+          <Form.Control
+            name="zip"
+            onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
+          />
         </Form.Group>
       </Row>
 
