@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const { dependencies } = require('./package.json');
 
 module.exports = {
   entry: './src/index.js',
@@ -53,18 +52,19 @@ module.exports = {
         './ModalRegister': './src/components/ModalRegister',
       },
       shared: {
-        ...dependencies,
         react: {
           singleton: true,
-          requiredVersion: dependencies['react'],
+          eager: true,
+          requiredVersion: false,
         },
         'react-dom': {
           singleton: true,
-          requiredVersion: dependencies['react-dom'],
+          eager: true,
+          requiredVersion: false,
         },
         'react-router-dom': {
           singleton: true,
-          requiredVersion: dependencies['react-router-dom'],
+          requiredVersion: false,
         },
       },
     }),
