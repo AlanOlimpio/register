@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { fakeRequest } from '../../utils/fakeRequest';
+import showToast from '../../utils/showToast';
 
 const statesNames = [
   'AC',
@@ -42,9 +44,32 @@ function FormRegister() {
     checkMeOut: false,
   });
 
-  function handleForm(e) {
+  async function handleForm(e) {
     e.preventDefault();
-    console.log(formData);
+
+    if (!formData?.email) {
+      showToast({
+        title: 'Atenção',
+        message: 'Preencha o e-mail antes de enviar o formulário',
+        variant: 'warning',
+      });
+      return;
+    }
+
+    try {
+      await fakeRequest(formData);
+      showToast({
+        title: 'Sucesso',
+        message: `Usuário ${formData.email} registrado com sucesso!`,
+        variant: 'success',
+      });
+    } catch (err) {
+      showToast({
+        title: 'Erro',
+        message: err.message || 'Falha ao registrar usuário',
+        variant: 'danger',
+      });
+    }
   }
 
   return (
